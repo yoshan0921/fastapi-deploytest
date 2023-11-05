@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from typing import Optional
+from pydantic import BaseModel, Field
 
 app = FastAPI()
 
@@ -30,15 +31,17 @@ world_population = {
 
 @app.get("/population/")
 async def population(country_name: Optional[str] = None, rank: Optional[int] = None):
+
     if country_name is None and rank is None:
-        return {"message": "Please provide either country_name or rank"}
+        return world_population  # Return all countries
 
     # Country name is specified
     if country_name:
         if country_name not in world_population:
-            return {"message": "Country name not found"}
+            return {"message": "The specified county is not in the top 20."}
         else:
-            rank = list(world_population.keys()).index(country_name) + 1
+            rank = list(world_population.keys()).index(
+                country_name) + 1
 
     # Rank is specified
     elif rank:
