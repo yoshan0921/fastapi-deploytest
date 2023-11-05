@@ -37,22 +37,22 @@ async def population(country_name: Optional[str] = None, rank: Optional[int] = N
     if country_name:
         if country_name not in world_population:
             return {"message": "Country name not found"}
-        return {
-            "country_name": country_name,
-            "rank": list(world_population.keys()).index(country_name) + 1,
-            "population": '{:,}'.format(world_population[country_name])
-        }
+        else:
+            rank = list(world_population.keys()).index(country_name) + 1
 
     # Rank is specified
-    if rank:
+    elif rank:
         if rank > len(world_population):
             return {"message": "Please specify a number up to the 20th place."}
-        country_name = list(world_population.keys())[rank - 1]
-        return {
-            "country_name": country_name,
-            "rank": rank,
-            "population": '{:,}'.format(world_population[country_name])
-        }
+        else:
+            country_name = list(world_population.keys())[rank - 1]
+
+    return {
+        "country_name": country_name,
+        "rank": rank,
+        "population": world_population[country_name]
+        # "population": '{:,}'.format(world_population[country_name])
+    }
 
 
 if __name__ == "__main__":
