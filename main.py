@@ -46,7 +46,7 @@ async def population(country_name: Optional[str] = None, rank: Optional[int] = N
     # Rank is specified
     if rank:
         if rank > len(world_population):
-            return {"message": "Rank not found"}
+            return {"message": "Please specify a number up to the 20th place."}
         country_name = list(world_population.keys())[rank - 1]
         return {
             "country_name": country_name,
