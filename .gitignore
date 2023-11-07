@@ -1,6 +1,5 @@
 .vscode
 .DS_Store
-Pipfile.lock
 __pycache__
 
 
